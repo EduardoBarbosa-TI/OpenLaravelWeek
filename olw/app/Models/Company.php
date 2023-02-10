@@ -14,4 +14,5 @@ class Company extends Model
         'comission_rate',
         'name'
     ];
+    
 }
