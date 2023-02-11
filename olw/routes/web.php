@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Models\SalesComission;
 use Illuminate\Support\Facades\Route;
 use OpenAI\Laravel\Facades\OpenAI;
 
@@ -29,16 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('/clients', ClientController::class)
-        ->except(['show']);
-
-    Route::get('/chart', function(){
-         return OpenAI::completions()->create([
-            'model' => 'text-davinci-003',
-            'prompt' => 'O que é a teoria das necessidades',
-            'max_tokens' => 1500
-         ])->choices[0]->text;
-    });
+    Route::resource('/clients', ClientController::class);
+    Route::get('/sales', [SaleController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';

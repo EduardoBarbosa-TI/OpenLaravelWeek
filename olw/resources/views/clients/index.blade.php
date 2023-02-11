@@ -9,38 +9,21 @@
                     btn-label="Add Client"
                     :route="route('clients.create')" />
 
-                
+                <div class="w-full overflow-hidden md:rounded-lg">
+                    <livewire:table
+                        resource="Client"
+                        :columns="[
+                        ['label' => 'Client', 'column' => 'user.name'],
+                        ['label' => 'Email','column' => 'user.email'],
+                        ['label' => 'City', 'column' => 'address.city'],
+                        ['label' => 'State', 'column' => 'address.state'],
+                    ]
+                    "
+                        edit="clients.edit"
+                        delete="clients.destroy"
+                    ></livewire:table>
+                </div>
 
-                    <table class="table-auto">
-                      <a href="{{ route('clients.create') }}">CRIAR</a>
-                        <thead>
-                          <tr>
-                            <th>Song</th>
-                            <th>Artist</th>
-                            <th>Year</th>
-                          </tr>
-                        </thead>
-                    @foreach ($clients as $client)
-                        <tbody>
-                          <tr>
-                            <td>{{ $client->user->name }}</td>
-                            <td>{{ $client->user->email }}</td>
-                            <td>{{ $client->address->city }}</td>
-                            <td>{{ $client->address->state }}</td>
-                            <td>{{ $client->address->state }}</td>
-                            <td>
-                              <a href="{{ route('clients.edit', $client->id)}}">Editar</a>
-                            </td>
-                            <td>
-                              <a href="">Excluir</a>
-                            </td>
-                          </tr>
-                        </tbody> 
-                    @endforeach
-                       
-                     </table>   
-                     {{ $clients->links()}} 
-                
         </div>
     </div>
 </x-app-layout>
