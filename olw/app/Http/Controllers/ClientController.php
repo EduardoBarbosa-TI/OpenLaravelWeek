@@ -55,16 +55,7 @@ class ClientController extends Controller
         return redirect()->route('clients.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Client  $client
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Client $client)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -74,7 +65,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -84,9 +75,20 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client)    
     {
+        DB::transaction(function() use($request, $client){
+            $client->user->update([
+                'email' => $request->get('email'),
+                'name'=> $request->get('name')
+            ]);
+
+            $client->update([
+                'address_id' => $request->get('address_id'),
+            ]);
+        });
         
+        return redirect()->route('clients.index');
     }
 
     /**

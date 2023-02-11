@@ -27,6 +27,13 @@
                             <td>{{ $client->user->email }}</td>
                             <td>{{ $client->address->city }}</td>
                             <td>{{ $client->address->state }}</td>
+                            <td>{{ $client->address->state }}</td>
+                            <td>
+                              <a href="{{ route('clients.edit', $client->id)}}">Editar</a>
+                            </td>
+                            <td>
+                              <a href="">Excluir</a>
+                            </td>
                           </tr>
                         </tbody> 
                     @endforeach
