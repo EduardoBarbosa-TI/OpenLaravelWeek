@@ -48,6 +48,7 @@ docker-compose exec \ #execução de um comando num contêiner existente
  ```bash
  ./vendor/bin/sail artisan route:list
 
+
  #ou
 
  ./vendor/bin/sail art route:list
